@@ -1,0 +1,17 @@
+<% include ../partials/header%>
+
+
+   <h1 style="text-align: center; margin-top:60px">Create new comment</h1>
+   <div class="form-box">
+    <form action="/campgrounds/<%= campground_id%>/createComment" method="POST">
+      <div>
+          <input type="text" name="text" placeholder="Text" required>
+      </div>
+      <div>
+        <input type="submit" value="Create Comment" class="btn btn-lg btn-primary">
+      </div>
+    </form>
+</div>
+
+
+<% include ../partials/footer%>

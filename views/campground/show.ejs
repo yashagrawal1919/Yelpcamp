@@ -1,0 +1,54 @@
+<% include ../partials/header %>
+   <div class="show-campground">
+     <img src="<%= campground.image %>" alt="">
+     <h1><%= campground.title %></h1>
+     <div>
+        <p class="pull-right">$ <%= campground.price %> / night</p>
+     </div>
+     <div>
+        <p><%= campground.description %></p>
+     </div>
+     <div>
+     </div>
+
+     <% if(!currentUser){ %>
+      <p></p>
+     <%}else if(String(campground.owner[0]) == String(currentUser._id)){ %>
+      <a href="/campgrounds/<%=campground._id%>/edit" class="btn btn-md btn-warning" style="display:inline-block;">Edit</a>
+     <form action="/campgrounds/<%=campground._id%>/delete?_method=DELETE" method="POST" style="display:inline-block;">
+       <input type="submit" value="Delete" class="btn btn-md btn-danger" >
+     </form>
+     <%}%>
+     
+     
+     
+
+     
+
+     <hr>
+
+     <div class="comment-list">
+        <div>
+            <a href="/campgrounds/<%=campground._id%>/comments/new" class="new-comment">Add new Comment</a>
+         </div>
+       <h3>Comments</h3>
+        <% campground.comment.forEach((comment) => { %>
+          <div class="comment">
+            <div><strong><%= comment.author %></strong></div> 
+            <div> <%= comment.text %> </div>
+            <div>
+              <a href="/campgrounds/<%= campground._id %>/comments/<%=comment._id%>/edit" class="btn btn-xs btn-warning">Edit</a>
+              <form action="/campgrounds/<%= campground._id %>/comments/<%=comment._id%>?_method=DELETE" method="POST" style="display:inline-block;">
+                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+              </form>
+            </div>
+            <br>
+          </div>
+        <% }) %>
+     </div>
+     
+     
+   </div>
+   
+        
+<% include ../partials/footer %>
